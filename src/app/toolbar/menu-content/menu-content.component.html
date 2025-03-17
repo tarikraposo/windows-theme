@@ -1,0 +1,31 @@
+<div class="menu-container">
+
+  <div class="menu-grid">
+    <mat-grid-list cols="4" rowHeight="100px">
+      @for (tile of tiles; track tile) {
+        <mat-grid-tile
+          [colspan]="tile.cols"
+          [rowspan]="tile.rows"
+          [style.background]="tile.color">{{tile.text}}</mat-grid-tile>
+      }
+    </mat-grid-list>
+  </div>
+
+<div>
+  <div
+  class="news-image"
+  [style.backgroundImage]="'url(' + getCurrentImage() + ')'"
+  >
+    <div class="news-content">
+      <h3>{{ noticias[activeIndex]?.titulo }}</h3>
+      <p>{{ noticias[activeIndex]?.data_publicacao }}</p>
+      <a [href]="noticias[activeIndex]?.link" target="_blank">Leia mais</a>
+    </div>
+  </div>
+  <div class="arrows">
+  <div (click)="prev()"><</div>
+  <div (click)="next()">></div>
+  </div>
+
+</div>
+

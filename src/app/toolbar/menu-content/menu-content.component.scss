@@ -1,0 +1,71 @@
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+  color: white;
+}
+
+.menu-grid {
+  z-index: 2;
+}
+.arrows {
+  display: flex;
+  justify-content: space-between;
+  div{
+    cursor: pointer;
+  }
+}
+
+.news-image {
+  position: relative; /* Necessário para posicionar o pseudo-elemento */
+  width: 100%; /* Ajuste conforme necessário */
+  height: 200px; /* Ajuste conforme necessário */
+  border-radius: 8px; /* Exemplo: bordas arredondadas */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Exemplo: sombra */
+  overflow: hidden; /* Garante que o pseudo-elemento não ultrapasse os limites */
+
+  /* Pseudo-elemento para a imagem de fundo */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: inherit; /* Usa a mesma imagem de fundo */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: brightness(0.6); /* Aplica o filtro apenas na imagem */
+    z-index: 1; /* Coloca o pseudo-elemento atrás do conteúdo */
+  }
+
+  /* Conteúdo da div */
+  .news-content {
+    position: relative; /* Garante que o conteúdo fique acima do pseudo-elemento */
+    z-index: 2; /* Coloca o conteúdo acima do pseudo-elemento */
+    padding: 16px;
+  }
+}
+
+
+.news-image h3 {
+  color: white; /* Exemplo: texto branco */
+  font-size: 1.5rem;
+}
+
+.news-image p {
+  color: lightgray;
+}
+
+.news-image a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.news-content {
+  position: relative; /* Garante que o conteúdo fique acima do pseudo-elemento */
+  z-index: 2; /* Coloca o conteúdo acima do pseudo-elemento */
+  padding: 16px;
+}

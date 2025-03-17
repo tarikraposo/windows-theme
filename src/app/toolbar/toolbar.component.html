@@ -1,0 +1,28 @@
+<div class="menu-container">
+  <div class="buttons-container">
+    <button mat-button class="menu-button" (click)="toggleMenu()">
+      <img src="assets/windows48x48.svg" alt="Windows Menu">
+    </button>
+    <button mat-button >
+      <img src="assets/chrome48x48.svg" alt="Windows Menu">
+    </button>
+
+    <button mat-button >
+      <img src="assets/github48x48.svg" alt="Windows Menu">
+    </button>
+
+
+    <button mat-button >
+      <img src="assets/linkedin48x48.svg" alt="Windows Menu">
+    </button>
+
+
+    <button mat-button (click)="toggleExplorer()" >
+      <img src="assets/folder48x48.svg" alt="Windows Menu">
+    </button>
+
+    <div class="custom-menu" *ngIf="menuOpen">
+      <app-menu-content/>
+    </div>
+  </div>
+</div>
