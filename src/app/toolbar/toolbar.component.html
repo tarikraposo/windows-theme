@@ -1,27 +1,27 @@
 <div class="menu-container">
   <div class="buttons-container">
-    <button mat-button class="menu-button" (click)="toggleMenu()">
+    <a mat-button class="menu-button" (click)="toggleMenu()">
       <img src="assets/windows48x48.svg" alt="Windows Menu">
-    </button>
-    <button mat-button >
+    </a>
+    <a mat-button >
       <img src="assets/chrome48x48.svg" alt="Windows Menu">
-    </button>
+    </a>
 
-    <button mat-button >
+    <a href="https://github.com/tarikraposo" mat-button target="_blank">
       <img src="assets/github48x48.svg" alt="Windows Menu">
-    </button>
+    </a>
 
 
-    <button mat-button >
+    <a mat-button href="https://www.linkedin.com/in/tarik-raposo-90a901144/" target="_blank">
       <img src="assets/linkedin48x48.svg" alt="Windows Menu">
-    </button>
+    </a>
 
 
-    <button mat-button (click)="toggleExplorer()" >
+    <a mat-button (click)="toggleExplorer()" >
       <img src="assets/folder48x48.svg" alt="Windows Menu">
-    </button>
+    </a>
 
-    <div class="custom-menu" *ngIf="menuOpen">
+    <div class="custom-menu" *ngIf="menuOpen===true">
       <app-menu-content/>
     </div>
   </div>

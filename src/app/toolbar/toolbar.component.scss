@@ -38,7 +38,7 @@
   height: 500px;
 }
 
-button.mat-mdc-button {
+button, a.mat-mdc-button {
   padding: 0 !important; /* Remove o padding do botão */
   min-width: 0 !important; /* Remove o tamanho mínimo */
 }
@@ -49,6 +49,7 @@ button.mat-mdc-button .mat-mdc-button-touch-target {
 
 img{
   width: 30px;
+  height: 30px;
 }
 
 .tile-content {

@@ -1,55 +1,19 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-
-import { CdkTreeModule } from '@angular/cdk/tree';
-import { MatButtonModule } from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
-import {MatTreeModule, MatTreeNestedDataSource} from '@angular/material/tree';
+import {FlatTreeControl} from '@angular/cdk/tree';
+import {Component} from '@angular/core';
+import {MatTreeFlatDataSource, MatTreeFlattener, MatTreeModule} from '@angular/material/tree';
 import {MatIconModule} from '@angular/material/icon';
-import { NestedTreeControl } from '@angular/cdk/tree';
+import {MatButtonModule} from '@angular/material/button';
 
-interface FolderNode {
+/**
+ * Food data with nested structure.
+ * Each node has a name and an optional list of children.
+ */
+interface FoodNode {
   name: string;
-  children?: FolderNode[];
+  children?: FoodNode[];
 }
 
-
-@Component({
-  selector: 'app-explorer',
-  standalone: true,
-  imports: [MatCardModule, MatTreeModule, MatButtonModule, MatIconModule, CdkTreeModule],
-  templateUrl: './explorer.component.html',
-  styleUrl: './explorer.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-
-})
-export class ExplorerComponent {
-  treeControl = new NestedTreeControl<FolderNode>(node => node.children);
-  dataSource = new MatTreeNestedDataSource<FolderNode>();
-
-  expandedNodes = new Set<FolderNode>(); // Armazena os nós que estão expandidos
-
-  constructor() {
-    this.dataSource.data = EXAMPLE_DATA;
-  }
-
-  hasChild = (_: number, node: FolderNode) => !!node.children && node.children.length > 0;
-
-  // Verifica se o nó está expandido
-  isExpanded(node: FolderNode): boolean {
-    return this.expandedNodes.has(node);
-  }
-
-  // Alterna o estado expandido do nó
-  toggleNode(node: FolderNode): void {
-    if (this.isExpanded(node)) {
-      this.expandedNodes.delete(node); // Remove o nó da lista de expandidos
-    } else {
-      this.expandedNodes.add(node); // Adiciona o nó à lista de expandidos
-    }
-  }
-}
-
-const EXAMPLE_DATA: FolderNode[] = [
+const TREE_DATA: FoodNode[] = [
   {
     name: 'Projects',
     children: [{name: 'Project 1'}, {name: 'Project 2'}, {name: 'Project 3'}],
@@ -58,13 +22,61 @@ const EXAMPLE_DATA: FolderNode[] = [
     name: 'Content',
     children: [
       {
-        name: 'Content 1',
-        children: [{name: 'archive 1'}, {name: 'archive 2'}],
+        name: 'Documents',
+        children: [{name: 'Archive 1'}, {name: 'Archive 2'}],
       },
       {
-        name: 'Content 2',
-        children: [{name: 'archive 1'}, {name: 'archive 2'}],
+        name: 'Images',
+        children: [{name: 'image.jpg'}, {name: 'image_2.jpg'}],
       },
     ],
   },
 ];
+
+/** Flat node with expandable and level information */
+interface ExampleFlatNode {
+  expandable: boolean;
+  name: string;
+  level: number;
+}
+
+/**
+ * @title Tree with flat nodes
+ */
+@Component({
+  selector: 'app-explorer',
+  templateUrl: './explorer.component.html',
+  styleUrls: ['./explorer.component.scss'],
+  standalone: true,
+  imports: [MatTreeModule, MatButtonModule, MatIconModule],
+})
+
+export class ExplorerComponent {
+  private _transformer = (node: FoodNode, level: number) => {
+    return {
+      expandable: !!node.children && node.children.length > 0,
+      name: node.name,
+      level: level,
+    };
+  };
+
+  treeControl = new FlatTreeControl<ExampleFlatNode>(
+    node => node.level,
+    node => node.expandable,
+  );
+
+  treeFlattener = new MatTreeFlattener(
+    this._transformer,
+    node => node.level,
+    node => node.expandable,
+    node => node.children,
+  );
+
+  dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+
+  constructor() {
+    this.dataSource.data = TREE_DATA;
+  }
+
+  hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
+}
