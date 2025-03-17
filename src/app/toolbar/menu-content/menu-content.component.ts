@@ -36,7 +36,9 @@ export class MenuContentComponent {
   localImages: string[] = [
     'assets/urban.jpeg',
     'assets/nature.jpg',
-    'assets/urban_tech.jpg'
+    'assets/urban_tech.jpg',
+    'assets/urban.jpeg',
+    'assets/nature.jpg',
   ];
 
   tiles: Tile[] = [

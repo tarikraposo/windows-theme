@@ -11,21 +11,17 @@
     </mat-grid-list>
   </div>
 
-<div>
-  <div
-  class="news-image"
-  [style.backgroundImage]="'url(' + getCurrentImage() + ')'"
-  >
+
+  <div class="news-image" [style.backgroundImage]="'url(' + getCurrentImage() + ')'">
     <div class="news-content">
       <h3>{{ noticias[activeIndex]?.titulo }}</h3>
       <p>{{ noticias[activeIndex]?.data_publicacao }}</p>
       <a [href]="noticias[activeIndex]?.link" target="_blank">Leia mais</a>
     </div>
-  </div>
-  <div class="arrows">
-  <div (click)="prev()"><</div>
-  <div (click)="next()">></div>
+    <div class="arrows">
+      <div (click)="prev()">&#8249;</div>
+      <div (click)="next()">&#8250;</div>
+    </div>
   </div>
 
-</div>
 
