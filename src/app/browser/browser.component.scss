@@ -1,0 +1,19 @@
+.browser-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  iframe {
+    flex: 1;
+    border: none;
+  }
+}
