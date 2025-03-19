@@ -8,6 +8,7 @@
   width: 20%;
   height: 100% !important;
   background-color: #424242;
+  overflow: auto;
 }
 
 .view {
@@ -16,9 +17,43 @@
 }
 
 .mat-tree-node {
-  display: block; /* Garante que os nós sejam exibidos */
+  display: flex; /* Garante que os nós sejam exibidos */
+  align-items: center; /* Centraliza verticalmente o conteúdo */
+  min-height: 0; /* Remove qualquer altura mínima */
+  margin: 0; /* Remove margens verticais */
+  padding: 0; /* Remove padding interno */
+  line-height: normal; /* Ajusta o espaçamento entre linhas */
+
+  &[aria-level='1'] {
+    padding-left: 0px !important; /* Força o valor */
+  }
+
+  &[aria-level='2'] {
+    padding-left: 20px !important; /* Força o valor */
+  }
+
+  &[aria-level='3'] {
+    padding-left: 40px !important; /* Força o valor */
+  }
+
 }
 
-.folders {
-  overflow: auto; /* Garante que os filhos não sejam cortados */
+.mat-tree-node button {
+  margin: 0; /* Remove margens extras */
+  padding: 0; /* Remove padding extra */
 }
+
+.mat-tree-node mat-icon {
+  margin: 0; /* Remove margens extras */
+  padding: 0; /* Remove padding extra */
+}
+
+.node-button {
+  display: none;
+}
+
+.mat-mdc-icon-button.mat-mdc-button-base {
+  --mdc-icon-button-state-layer-size: 32px;
+}
+
+

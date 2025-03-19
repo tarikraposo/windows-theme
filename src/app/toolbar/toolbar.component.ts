@@ -5,6 +5,10 @@ import { CommonModule } from '@angular/common';
 import { MenuContentComponent } from './menu-content/menu-content.component';
 import { ExplorerComponent } from '../explorer/explorer.component';
 import { ExplorerService } from '../services/explorer.service';
+import { BrowserService } from '../services/browser.service';
+import { BrowserComponent } from '../browser/browser.component';
+import { MatDialog } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-toolbar',
@@ -16,7 +20,15 @@ import { ExplorerService } from '../services/explorer.service';
 export class ToolbarComponent {
   menuOpen = false;
 
-  constructor(private explorerService: ExplorerService, private elementRef: ElementRef) {}
+  constructor(private explorerService: ExplorerService, private elementRef: ElementRef, private dialog: MatDialog, private browserService: BrowserService) {}
+
+  openBrowser(): void {
+    this.dialog.open(BrowserComponent, {
+      width: '85%',
+      height: '85%',
+      panelClass: 'custom-dialog-container', // Classe CSS opcional para personalização
+    });
+  }
 
   toggleExplorer(): void {
     this.explorerService.toggleExplorer();
