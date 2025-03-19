@@ -12,8 +12,11 @@
     box-sizing: border-box;
   }
 
-  iframe {
+  .website-content {
     flex: 1;
-    border: none;
+    overflow: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #fff;
   }
 }

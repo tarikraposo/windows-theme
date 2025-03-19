@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DomSanitizer } from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -11,15 +11,21 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrl: './browser.component.scss'
 })
 export class BrowserComponent {
-  url: string = 'https://www.example.com'; // URL padrão
+  url: string = 'https://example.com'; // URL padrão
+  htmlContent: string = ''; // Armazena o conteúdo HTML do site
 
-  get proxiedUrl(): string {
-    return `http://localhost:3000/proxy?url=${encodeURIComponent(this.url)}`;
-  }
+  constructor(private http: HttpClient) {}
 
-  constructor(public sanitizer: DomSanitizer) {}
-
-  updateIframe(): void {
-    console.log('URL atualizada para:', this.url);
+  loadWebsite(): void {
+    const proxyUrl = `http://localhost:3000/proxy?url=${encodeURIComponent(this.url)}`;
+    this.http.get(proxyUrl, { responseType: 'text' }).subscribe({
+      next: (response) => {
+        this.htmlContent = response;
+      },
+      error: (err) => {
+        console.error('Erro ao carregar o site:', err);
+        this.htmlContent = '<p>Erro ao carregar o site.</p>';
+      },
+    });
   }
 }

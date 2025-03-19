@@ -5,14 +5,16 @@
 }
 
 .folders {
-  width: 20%;
+  min-width: 20%;
+  width: 25%;
+  max-width: 25%;
   height: 100% !important;
   background-color: #424242;
   overflow: auto;
 }
 
 .view {
-  width: 70%;
+  width: 75%;
   height: 100%;
 }
 
@@ -23,7 +25,8 @@
   margin: 0; /* Remove margens verticais */
   padding: 0; /* Remove padding interno */
   line-height: normal; /* Ajusta o espaçamento entre linhas */
-
+  /* Adicione estas propriedades para o texto com reticências */
+  max-width: 80%;
   &[aria-level='1'] {
     padding-left: 0px !important; /* Força o valor */
   }
@@ -35,9 +38,18 @@
   &[aria-level='3'] {
     padding-left: 40px !important; /* Força o valor */
   }
-
+  p {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis !important;
+    white-space: nowrap;
+  }
 }
 
+.mat-tree {
+  padding: 12px 0px 0px 12px;
+
+}
 .mat-tree-node button {
   margin: 0; /* Remove margens extras */
   padding: 0; /* Remove padding extra */
